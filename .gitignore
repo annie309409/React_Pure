@@ -1,5 +1,9 @@
 /.idea
 /React_Pure.iml
+
+/js/vendor/babel.min.js
+/js/vendor/react/react-dom@16.14.dev.js
+/js/vendor/react/react@16.14.dev.js
 # Created by https://www.toptal.com/developers/gitignore/api/react
 # Edit at https://www.toptal.com/developers/gitignore?templates=react
 
@@ -18,5 +22,6 @@ bower_components
 psd
 thumb
 sketch
+
 
 # End of https://www.toptal.com/developers/gitignore/api/react
