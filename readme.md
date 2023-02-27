@@ -95,6 +95,7 @@
     <script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
     <script src="./js/vendor/babel.min.js"></script>
     <script type="text/babel">
+        //리액트 모듈에서 뽑아 씀
         const {Fragment,useState} = React;
         const App =()=>{
             //const [변수명, setter] = useState('초기값');
@@ -128,3 +129,59 @@
 
 
 ### 사용방법(스타일)
+* 리액트는 기존 class와 다르게 className을 사용하여 클래스명을 지정할 수 있다.
+* inline style이 아닌 css파일을 따로 적용하려면 className을 통해 요소들을 구분하는 것이 좋다.
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My first html page</title>
+    <style>
+        .P1{
+            color: red;
+        }
+        .P2{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="./js/vendor/react/react@16.14.dev.js"></script>
+    <script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+    <script src="./js/vendor/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const {Fragment,useState} = React;
+        const App =()=>{
+
+            const [p1text, setP1text] = useState('just react');
+            const [p2text, setP2text] = useState('2023');
+
+            const changeContent = ()=>{
+                setP1text('welcome to React world');
+                setP2text('since 2013');
+            }
+
+            return (
+
+                <Fragment>
+                    // 클래스 설정 
+                    <p id="p1" className="P1">{p1text}</p>
+                    <p id="p2" className="P2">{p2text}</p>
+                    <button onClick={changeContent}>change content</button>
+                </Fragment>
+            );
+        };
+        ReactDOM.render(<App />,document.getElementById('app'));
+
+
+    </script>
+</body>
+</html>
+
+```

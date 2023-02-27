@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My first html page</title>
+    <style>
+        .P1{
+            color: red;
+        }
+        .P2{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="./js/vendor/react/react@16.14.dev.js"></script>
+    <script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+    <script src="./js/vendor/babel.min.js"></script>
+    <!--바벨 필요 :: unexpected token이 나오면 babel이슈임-->
+    <script type="text/babel">
+        // 리액트 라이브러리에서 빼올 것
+        // 단일 태그를 div로 감싸기 싫을때 사용하는 것
+        const {Fragment,useState} = React;
+        const App =()=>{
+            //const [변수명, setter] = useState('초기값');
+            const [p1text, setP1text] = useState('just react');
+            const [p2text, setP2text] = useState('2023');
+
+            const changeContent = ()=>{
+                setP1text('welcome to React world');
+                setP2text('since 2013');
+            }
+
+            return (
+                // 일종의 컴포넌트라고 보면 됨 (UI를 컴포넌트로 정의)
+                // return은 단일 태그(하나의 요소)만 가능하다.(UI 리턴 시)
+                <Fragment>
+                    <p id="p1" className="P1">{p1text}</p>
+                    <p id="p2" className="P2">{p2text}</p>
+                    <button onClick={changeContent}>change content</button>
+                </Fragment>
+            );
+        };
+        //위에서 정의한 컴포넌트 호출
+        ReactDOM.render(<App />,document.getElementById('app'));
+
+
+    </script>
+</body>
+</html>
