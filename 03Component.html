@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>React Component</title>
+    <style>
+        .root2 {
+            color: orange;
+        }
+        #root3{
+            color: red;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div id="root1"></div>
+<div id="root2"></div>
+<div id="root3"></div>
+<div id="root4"></div>
+<div id="root5"></div>
+<div id="root6"></div>
+<div id="root7"></div>
+
+<script src="./js/vendor/react/react@16.14.dev.js"></script>
+<script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+<script src="./js/vendor/babel.min.js"></script>
+
+
+<script type="text/babel">
+    // 함수 기반 컴포넌트 정의 - 주류
+    // 클래스 기반 컴포넌트 보다 선언하기 편하고 메모리자원을 덜 사용한다는 장점이있음.
+    //  과거에는 state관리, life-cycle API를 사용할 수 없었는데,
+    // 2019년 2월에 발표된 v16.8부터는 react hook이 지원되면서 해결
+    // 메타에서는 함수형 컴포넌트 훅을 함께 사용할 것을 권장함
+    const Hello1 = ()=>{
+        return  React.createElement('h1',null, 'hello world!');
+    };
+
+    const Hello2 = ()=>{
+        return [React.createElement('span',null,'hello'),React.createElement('em',null,' wonderful'),' world'];
+    }
+
+    const Hello3=()=>{
+        return React.createElement('h3',{className :'abc', style:{textAlign:'center'}, onClick:()=>{alert(`Hello, again!!`)}}, ' hello, another world!' );
+    }
+    const Hello4=()=>{
+        return <h2><span>hello</span>, <em>wonderful</em> world!</h2>;
+    }
+    const Hello5=()=>{
+        return <h3 className="abc" style={{textAlign: 'center'}} onClick={()=>{ alert('Hello,Again!')}}>hello, another world!</h3>;
+    }
+    const Hello6=()=>{
+        return <h2><span>hello</span>, <em>wonderful</em> world!</h2>;
+    }
+    const Hello7=()=>{
+
+        let myClass= 'root2';
+        const myText=()=>'World!';
+        return (
+            <p className={myClass}>
+                <span>10 * 10 = {10 * 10} </span>
+                <span>hello, my {myText()}</span>
+            </p>
+        )
+    }
+
+
+    //-----------------------------------
+    ReactDOM.render(Hello1(),document.querySelector('#root1'));
+    ReactDOM.render(Hello2(),document.querySelector('#root2'));
+    ReactDOM.render(Hello3(),document.querySelector('#root3'));
+    ReactDOM.render(Hello4(),document.querySelector('#root4'));
+    ReactDOM.render(Hello5(),document.querySelector('#root5'));
+    ReactDOM.render(Hello6(),document.querySelector('#root6'));
+    ReactDOM.render(Hello7(),document.querySelector('#root7'));
+
+</script>
+</body>
+</html>

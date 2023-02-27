@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JSX</title>
+    <style>
+        .root2 {
+            color: orange;
+        }
+        #root3{
+            color: red;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div id="root1"></div>
+<div id="root2"></div>
+<div id="root3"></div>
+<div id="root4"></div>
+<div id="root5"></div>
+<div id="root6"></div>
+
+<script src="./js/vendor/react/react@16.14.dev.js"></script>
+<script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+<script src="./js/vendor/babel.min.js"></script>
+
+
+<script type="text/babel">
+
+
+    ReactDOM.render(
+        <h1>hello world!</h1>,
+        document.querySelector('#root1'));
+    ReactDOM.render(
+        <h1 className="root2">hello world!</h1>,
+        document.querySelector('#root2'));
+    ReactDOM.render(
+        <h2 id="root3"> <span>hello</span> world </h2>,
+        document.querySelector('#root3'));
+    ReactDOM.render(
+        <h2><span>hello</span>, <em>wonderful</em> world!</h2>,
+        document.querySelector('#root4'));
+     ReactDOM.render(
+         <h3 className="abc" style={{textAlign: 'center'}} onClick={()=>{ alert('Hello,Again!')}}>hello, another world!</h3>,
+        document.querySelector('#root5'));
+
+
+     let myClass= 'root2';
+     const myText=()=>'World!';
+     ReactDOM.render(
+         <p className={myClass}>
+             <span>10 * 10 = {10 * 10} </span>
+             <span>hello, my {myText()}</span>
+         </p>,
+         document.querySelector('#root6')
+     )
+</script>
+</body>
+</html>
