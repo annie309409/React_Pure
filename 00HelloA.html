@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My first html page</title>
+</head>
+<body>
+    <div id="app">
+        <p id="p1" style="color:red">just react</p>
+        <p id="p2" style="color:green">2023</p>
+        <button onclick="changeContent()">change content</button>
+    </div>
+    <script>
+        function changeContent(){
+            const p1 = document.querySelector('#p1');
+            p1.textContent = 'welcome to web';
+            const p2 = document.querySelector('#p2');
+            p2.textContent='1991';
+        }
+    </script>
+</body>
+</html>
