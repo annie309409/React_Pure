@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>React.createElement</title>
+    <style>
+        .root2 {
+            color: orange;
+        }
+        #root3{
+            color: red;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div id="root1"></div>
+<div id="root2"></div>
+<div id="root3"></div>
+<div id="root4"></div>
+<div id="root5"></div>
+
+<script src="./js/vendor/react/react@16.14.dev.js"></script>
+<script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+
+<script>
+    //createElement(요소, 속성, 내용, 자식요소)
+    //render(대상요소, dom요소)
+    ReactDOM.render(
+        React.createElement('h1',null, 'hello world!'),
+        document.querySelector('#root1'));
+    ReactDOM.render(
+        React.createElement('h1',{className : 'root2'}, 'hello world!'),
+        document.querySelector('#root2'));
+    ReactDOM.render(
+        React.createElement('h2',{id : 'root3'},
+            React.createElement('span',null,'hello'), ', world!!'),
+        document.querySelector('#root3'));
+    // ReactDOM.render(
+    //     React.createElement('h2',null,
+    //            //span의 형제요소로 em넣어보기
+    //         React.createElement('span',null,'hello'),React.createElement('em',null,' wonderful'),' world!' ),
+    //     document.querySelector('#root4'));
+    ReactDOM.render(
+        React.createElement('h2',null,
+            //span의 자식요소로 em 넣어보기
+            React.createElement('span',null,'hello',React.createElement('em',null,' wonderful')),' world!' ),
+        document.querySelector('#root4'));
+     ReactDOM.render(
+            React.createElement('h3',{className :'abc', style:{textAlign:'center'}, onClick:()=>{alert(`Hello, again!!`)}}, ' hello, another world!' ),
+            document.querySelector('#root5'));
+</script>
+</body>
+</html>
