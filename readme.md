@@ -358,9 +358,19 @@
     
     ReactDOM.render(<Hello2 name ='impressive' color='red' />,document.querySelector('#root3'));
 ```
+* 태그안에 태그를 찍어서 보내고 싶다면 다음과 같이 {}안에 넣어 자바스크립트인것을 보여주면 된다.
+```javascript
+    const Hello1=({name})=>{
+        return <h2><span>hello</span>, <em>{name}</em> world!</h2>;
+    }
+    
+    ReactDOM.render(<Hello1 name={<small>awesome</small>} />,document.querySelector('#root2'));
+```
+> 결과  <br>
+> ![이미지](./img/result0228004.png) <br>
 
 
-## Props
+### Props
 * 컴퍼넌트 내부에 전달하는 인수임
 * 랜더이벤트 발생시점은 내부 값이 바뀌면 실행됨
 * 외부에서 컴포넌트로 넘겨주는 argument를 props라고 함 

@@ -57,7 +57,7 @@
     //-----------------------------------
     // 값을 넘기려면 속성명=속성값 형식으로 넘긴다.
     ReactDOM.render(<Hello1 name='fabulous' />,document.querySelector('#root1'));
-    ReactDOM.render(<Hello1 name='awesome' />,document.querySelector('#root2'));
+    ReactDOM.render(<Hello1 name={<small>awesome</small>} />,document.querySelector('#root2'));
     ReactDOM.render(<Hello2 name ='impressive' color='red' />,document.querySelector('#root3'));
     ReactDOM.render(<Hello2 name ='good' color='blue' />,document.querySelector('#root4'));
     ReactDOM.render(<Hello3 name ='wonderful' color='green' style='yellow' />,document.querySelector('#root5'));
