@@ -109,6 +109,9 @@
     ReactDOM.render(<App />,document.getElementById('app'));
 ```
 
+* JSX에서 return되는 값은 반드시 단일요소의 태그로 반환되어야하는데,
+* 이때, 감싸고 싶지 않다면 fragment를 사용하면 되고 
+* <fragmement></fragment> 혹은 <></> 이렇게 표현하면 된다.
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -424,7 +427,81 @@
 > 결과  <br>
 > ![이미지](./img/result0228003.png) <br>
 
+* props를 활용하여 다음과 같이 data를 넣고 엘리먼트를 반복시킬 수 도있다.
+```javascript
+    const items = [
+        "연어 500그램",
+        "잣 1 컵",
+        "버터 상추 2 컵",
+        "옐로 스쿼시(Yellow Squash, 호박의 한 종류) 1개",
+        "올리브 오일 1/2 컵",
+        "마늘 3 쪽"
+    ]
+
+    const instructs = [
+        "오븐을 350도로 예열한다.",
+        "유리 베이킹 그릇에 올리브 오일을 두른다.",
+        "연어, 마늘, 잣을 그릇에 담는다.",
+        "오븐에서 15분간 익힌다.",
+        "옐로 스쿼시를 추가하고 다시 30분간 오븐에서 익힌다.",
+        "오븐에서 그릇을 꺼내서 15분간 식힌다음에 상추를 곁들여서 내놓는다."
+    ];
+
+    let Food1=(props)=>{
+        // 코드블럭 사용 시 작동안함.
+        let itemsJSX= props.item.map((e,i)=><li key={i}>{e}</li>);
+        let instructsJSX = props.inst.map((e,i)=> <p key={i}>{e}</p>)
+        return (
+            <section id ="baked-salmon">
+                <h1>{props.menu1}</h1>
+                <ul className="ingredients">
+                    {itemsJSX}
+                </ul>
+                <section className="instruction">
+                    <h2>{props.menu2}</h2>
+                    {instructsJSX}
+                </section>
+            </section>
+        )
+    }
+
+    ReactDOM.render(<Food1 item= {items} inst={instructs} menu1='구운연어' menu2='조리절차' />,document.querySelector('#root1'));
+
+```
+> 결과  <br>
+> ![이미지](./img/result0228006.png) <br>
 
 
 ## State
+* 컴포넌트의 상태를 나타내는 값으로 컴포넌트를 외부에 보여줘야 할 때 사용 하며, 컴포넌트 내에서 지속적인 변경이 발생하는 값을 관리하기위해 사용 한다.
+* State값이 변경되면 react는 변경된 부분만 자동으로 재 랜더링한다.
+* props와 차이는 내용과 성격을 바꾸는 것의 차이 이다. (props는 성격만 바꿈 : e.g. backgound-color , color등 html에 들어갈 수 있는 속성만 변경) (readOnly)
+* state는 실제 외부로 보여지는 값을 바꾼다. (e.g. 댓글 수 , 방문자 수 출력)(가변형)
+* useState함수를 사용하면 된다. useState는 초기변수명, set초기변수명으로 표기하는데, 내용을 바꿀땐 set초기변수명을 바꾼다.
+* useState는 반드시 리액트라이브러리에서 모듈을 끌고 와야 사용 가능하다.
+* useState의 변수명은  read-Only이고, set변수명은 write-Only이다.
 
+```javascript
+    const {useState, Fragment} =  React;
+
+    const Counter = ()=>{
+        const [cnt,setCnt]=useState(0);
+        return (
+            //빈 태그는 Fragment를 의미한다.
+            <>
+                <p>count : {cnt}</p>
+                <div><button type="button" onClick={()=>setCnt(cnt+1)}>가드를 올려요</button></div>
+            </>
+        );
+    }
+    
+    ReactDOM.render(<Counter />,document.querySelector('#root1'));
+```
+> 결과  <br>
+> ![이미지](./img/result0228005.png) <br>
+
+
+## 클래스 기반
+## 함수기반
+* 현재 더 권고되고있는 상황임
+* Life-cycle hook이 지원되면서 함수기반의 사용이 권고됨

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>React State</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+        .pink{
+            color: hotpink;
+        }
+    </style>
+</head>
+<body>
+<div id="root1"></div>
+<div id="root2"></div>
+<div id="root3"></div>
+<div id="root4"></div>
+<div id="root5"></div>
+<div id="root6"></div>
+<div id="root7"></div>
+
+<script src="./js/vendor/react/react@16.14.dev.js"></script>
+<script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+<script src="./js/vendor/babel.min.js"></script>
+
+
+<script type="text/babel">
+    const {useState, Fragment} =  React;
+    const Counter = ()=>{
+        const [cnt,setCnt]=useState(0);
+        return (
+            //빈 태그는 Fragment를 의미한다.
+            <>
+                <p>count : {cnt}</p>
+                <div><button type="button" onClick={()=>setCnt(cnt+1)}>가드를 올려요</button></div>
+            </>
+        );
+    }
+    //-----------------------------------
+    // 값을 넘기려면 속성명=속성값 형식으로 넘긴다.
+    ReactDOM.render(<Counter />,document.querySelector('#root1'));
+
+
+</script>
+</body>
+</html>
