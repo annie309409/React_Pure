@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>React Props</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+        .blue{
+            color: blue;
+        }
+        .pink{
+            color: hotpink;
+        }
+    </style>
+</head>
+<body>
+<div id="root1"></div>
+<div id="root2"></div>
+<div id="root3"></div>
+<div id="root4"></div>
+<div id="root5"></div>
+<div id="root6"></div>
+<div id="root7"></div>
+
+<script src="./js/vendor/react/react@16.14.dev.js"></script>
+<script src="./js/vendor/react/react-dom@16.14.dev.js"></script>
+<script src="./js/vendor/babel.min.js"></script>
+
+
+<script type="text/babel">
+    // 값을 받을때는 파라미터로 넣은 값을{}안에 표현한다.
+    const Hello1=({name})=>{
+        return <h2><span>hello</span>, <em>{name}</em> world!</h2>;
+    }
+    //일일히 변수 받는게 힘듦
+    const Hello2=({name,color})=>{
+        return <h2><span>hello</span>, <em className={color}>{name}</em> world!</h2>;
+    }
+
+    // 전개연산자를 사용하여 값을 받을 수 있음
+    const Hello3=(props)=>{
+        // 객체로 전달받아서 사용함
+        return <h2><span>hello</span>, <em className={props.color} style={{backgroundColor:props.style}}>{props.name}</em> world!</h2>;
+    }
+
+    Hello3.defaultProps={
+        name : 'great',
+        color : 'red',
+        style : 'black'
+    }
+
+    //-----------------------------------
+    // 값을 넘기려면 속성명=속성값 형식으로 넘긴다.
+    ReactDOM.render(<Hello1 name='fabulous' />,document.querySelector('#root1'));
+    ReactDOM.render(<Hello1 name='awesome' />,document.querySelector('#root2'));
+    ReactDOM.render(<Hello2 name ='impressive' color='red' />,document.querySelector('#root3'));
+    ReactDOM.render(<Hello2 name ='good' color='blue' />,document.querySelector('#root4'));
+    ReactDOM.render(<Hello3 name ='wonderful' color='green' style='yellow' />,document.querySelector('#root5'));
+    ReactDOM.render(<Hello3 color='pink' name='react'/>,document.querySelector('#root6'));
+    // ReactDOM.render(<Hello7 />,document.querySelector('#root4'));
+
+
+
+</script>
+</body>
+</html>

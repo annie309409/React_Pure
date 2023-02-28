@@ -76,6 +76,7 @@
 * 리액트는 기존 태그와 다르게 js를 활용하여 UI컴포넌트를 함수의 리턴값으로 사용한다.
 * UI컴포넌트(태그)를 리턴하기 위해선 반드시 바벨이 필요하다.
 * js공식 문법은 아니지만 요소를 생성하기에 쓰기 편안하고 babel을 통한 과정에서 발생하는 문법적 오류를 인식하기 쉽다.
+* JSX는 반드시 바벨을 통한 트랜스파일링이 필요하다.
 
 ### compiling , transpiling
 1. compiling 
@@ -259,3 +260,161 @@
 
 
 ## React Components
+* 리액트는 컴포넌트화 시켜 필요한곳에 불러올 수 있다.
+* createElement 를 통해 요소를 생성할 수도 있지만, JSX를 활용하여 컴포넌트를 바로 들고올 수 있다.
+* JSX컴포넌트는  html과 비슷하게 보이지만, javascript와 같게 사용할 수 있다. 
+* 따라서, style에 들어갈 내용들 또한 js에서 사용하는 카멜표기법을 활용해서 작성 할 수 있다.
+```javascript
+   const Food1 =()=>{
+        return(
+            <section id ="baked-salmon">
+                <h1>구운연어</h1>
+                <ul className="ingredients">
+                    <li>연어 500그램</li>
+                    <li>잣 1 컵</li>
+                    <li>버터 상추 2 컵</li>
+                    <li>옐로 스쿼시(Yellow Squash, 호박의 한 종류) 1개</li>
+                    <li>올리브 오일 1/2 컵</li>
+                    <li>마늘 3 쪽</li>
+                </ul>
+                <section className="instruction">
+                    <h2>조리절차</h2>
+                    <p> 오븐을 350도로 예열한다.</p>
+                    <p> 유리 베이킹 그릇에 올리브 오일을 두른다.</p>
+                    <p> 연어, 마늘, 잣을 그릇에 담는다.</p>
+                    <p> 오븐에서 15분간 익힌다.</p>
+                    <p> 옐로 스쿼시를 추가하고 다시 30분간 오븐에서 익힌다.</p>
+                    <p> 오븐에서 그릇을 꺼내서 15분간 식힌다음에 상추를 곁들여서 내놓는다.</p>
+                </section>
+            </section>
+        )
+    }
+
+    ReactDOM.render(<Food1 />,document.querySelector('#root1'));
+```
+
+### 반복문 
+* 리액트에서 컴포넌트를 반복하는방법은 map함수를 사용하는 것이다.
+* 따라서 다음과 같은 배열형 데이터에 대해서 컴포넌트를 반복시킬 수 있다.
+* 리액트에서 반복문은 map함수만 사용한다.
+```javascript
+    const items = [
+        "연어 500그램",
+        "잣 1 컵",
+        "버터 상추 2 컵",
+        "옐로 스쿼시(Yellow Squash, 호박의 한 종류) 1개",
+        "올리브 오일 1/2 컵",
+        "마늘 3 쪽"
+    ]
+
+    const instructs = [
+        "오븐을 350도로 예열한다.",
+        "유리 베이킹 그릇에 올리브 오일을 두른다.",
+        "연어, 마늘, 잣을 그릇에 담는다.",
+        "오븐에서 15분간 익힌다.",
+        "옐로 스쿼시를 추가하고 다시 30분간 오븐에서 익힌다.",
+        "오븐에서 그릇을 꺼내서 15분간 식힌다음에 상추를 곁들여서 내놓는다."
+    ];
+
+    let Food2=()=>{
+        let menu = '구운연어';
+        // 코드블럭 사용 시 작동안함.
+        let itemsJSX= items.map((e,i)=><li key={i}>{e}</li>);
+        let instructsJSX= instructs.map((e,i)=> <p key={i}>{e}</p>)
+        return (
+            <section id ="baked-salmon">
+                <h1>{menu}</h1>
+                <ul className="ingredients">
+                    {itemsJSX}
+                </ul>
+                <section className="instruction">
+                    <h2>조리절차</h2>
+                    {instructsJSX}
+                </section>
+            </section>
+        )
+    }
+
+    ReactDOM.render(<Food2 />,document.querySelector('#root2'));
+```
+
+## arguments 
+* JSX안에서도 외부로부터 내부에 argument를 넘길 수 있다.
+* 받는 형식은 {변수명}이고 넘기는 형식은 변수명=넘길값 이다.
+* 여러값의 arguement를 받을 경우 파라미터 위치의 {}안에 컴마로 구분하면된다
++ 예(변수 한개만 받기)
+```javascript
+    const Hello1=({name})=>{
+        return <h2><span>hello</span>, <em>{name}</em> world!</h2>;
+    }
+    
+    ReactDOM.render(<Hello1 name='fabulous' />,document.querySelector('#root1'));
+```
++ 예(여러 값을 받기)
+```javascript
+    const Hello2=({name,color})=>{
+        return <h2><span>hello</span>, <em className={color}>{name}</em> world!</h2>;
+    }
+    
+    ReactDOM.render(<Hello2 name ='impressive' color='red' />,document.querySelector('#root3'));
+```
+
+
+## Props
+* 컴퍼넌트 내부에 전달하는 인수임
+* 랜더이벤트 발생시점은 내부 값이 바뀌면 실행됨
+* 외부에서 컴포넌트로 넘겨주는 argument를 props라고 함 
+* 변수명 자체로 사용할 수 있고  인수가 여러개인 경우 하나의 props로 받아(전개) 
+* props를 컴포넌트 내부에서 출력할 때 {props.변수명} 형태의 객체형식으로 출력하면 된다.
+```javascript
+    const Hello3=(props)=>{
+        // 객체로 전달받아서 사용함
+        return <h2><span>hello</span>, <em className={props.color} style={{backgroundColor:props.style}}>{props.name}</em> world!</h2>;
+    }
+    
+    ReactDOM.render(<Hello3 name ='wonderful' color='green' style='yellow' />,document.querySelector('#root5'));
+```
+> 결과  <br>
+> ![이미지](./img/result0228002.png) <br>
+
+* 만약, 기본속성을 정의하려면 defaultProps를 이용하면 된다.
+
+```javascript
+   const Hello3=(props)=>{
+        // 객체로 전달받아서 사용함
+        return <h2><span>hello</span>, <em className={props.color} style={{backgroundColor:props.style}}>{props.name}</em> world!</h2>;
+    }
+
+    Hello3.defaultProps={
+        name : 'great',
+        color : 'red',
+        style : 'black'
+    }
+    
+    ReactDOM.render(<Hello3 />,document.querySelector('#root6'));
+```
+> 결과  <br>
+> ![이미지](./img/result0228001.png) <br>
+
+* 기본 속성을 정의하면 다음과 같이 추가된 값에 대해서만 정의하고 나머지는 기본속성을 이용하게 된다.
+```javascript
+    const Hello3=(props)=>{
+        // 객체로 전달받아서 사용함
+        return <h2><span>hello</span>, <em className={props.color} style={{backgroundColor:props.style}}>{props.name}</em> world!</h2>;
+    }
+
+    Hello3.defaultProps={
+        name : 'great',
+        color : 'red',
+        style : 'black'
+    }
+    
+    ReactDOM.render(<Hello3 color='pink' name='react'/>,document.querySelector('#root6'));
+```
+> 결과  <br>
+> ![이미지](./img/result0228003.png) <br>
+
+
+
+## State
+
